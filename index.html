@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osiris Business Model Canvas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e27;
+            color: #e0e0e0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .canvas-container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #9b59b6, #667eea, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        /* Business Model Canvas */
+        .business-canvas {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(3, auto);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .canvas-block {
+            background: #2d2d44;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid;
+            position: relative;
+        }
+        
+        .canvas-block h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .canvas-block ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .canvas-block li {
+            padding: 8px 0;
+            border-bottom: 1px solid #3d3d5c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .canvas-block li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Canvas Block Positioning */
+        .key-partners { 
+            grid-column: 1; 
+            grid-row: 1 / 3; 
+            border-color: #9b59b6;
+        }
+        
+        .key-activities { 
+            grid-column: 2; 
+            grid-row: 1; 
+            border-color: #667eea;
+        }
+        
+        .key-resources { 
+            grid-column: 2; 
+            grid-row: 2; 
+            border-color: #667eea;
+        }
+        
+        .value-props { 
+            grid-column: 3; 
+            grid-row: 1 / 3; 
+            border-color: #22c55e;
+        }
+        
+        .customer-relations { 
+            grid-column: 4; 
+            grid-row: 1; 
+            border-color: #f39c12;
+        }
+        
+        .channels { 
+            grid-column: 4; 
+            grid-row: 2; 
+            border-color: #f39c12;
+        }
+        
+        .customer-segments { 
+            grid-column: 5; 
+            grid-row: 1 / 3; 
+            border-color: #e74c3c;
+        }
+        
+        .cost-structure { 
+            grid-column: 1 / 3; 
+            grid-row: 3; 
+            border-color: #c0392b;
+        }
+        
+        .revenue-streams { 
+            grid-column: 3 / 6; 
+            grid-row: 3; 
+            border-color: #16a085;
+        }
+        
+        /* Value Chain */
+        .value-chain {
+            background: #2d2d44;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 3px solid #667eea;
+        }
+        
+        .chain-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            position: relative;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .chain-step {
+            flex: 1;
+            min-width: 150px;
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #3d3d5c;
+            transition: all 0.3s ease;
+        }
+        
+        .chain-step:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .chain-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .chain-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        
+        .chain-value {
+            font-size: 0.9em;
+            color: #a0a0b0;
+        }
+        
+        /* Revenue Model */
+        .revenue-model {
+            background: #2d2d44;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 3px solid #16a085;
+        }
+        
+        .revenue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .revenue-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #3d3d5c;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .revenue-card:hover {
+            border-color: #16a085;
+            transform: scale(1.05);
+        }
+        
+        .revenue-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #16a085;
+        }
+        
+        .revenue-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .revenue-amount {
+            font-size: 2em;
+            font-weight: bold;
+            color: #16a085;
+            margin: 15px 0;
+        }
+        
+        .revenue-details {
+            font-size: 0.9em;
+            color: #a0a0b0;
+            line-height: 1.6;
+        }
+        
+        /* Market Opportunity */
+        .market-opportunity {
+            background: #2d2d44;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 3px solid #9b59b6;
+            text-align: center;
+        }
+        
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .market-stat {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #3d3d5c;
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #9b59b6;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #a0a0b0;
+            font-size: 0.9em;
+        }
+        
+        /* Competitive Advantages */
+        .advantages {
+            background: #2d2d44;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 3px solid #22c55e;
+        }
+        
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .advantage-card {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #3d3d5c;
+            transition: all 0.3s ease;
+        }
+        
+        .advantage-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-3px);
+        }
+        
+        .advantage-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #22c55e;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .business-canvas {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            
+            .canvas-block {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas-container">
+        <div class="header">
+            <h1>💼 Osiris Business Model Canvas</h1>
+            <p style="color: #a0a0b0; font-size: 1.2em;">Complete Value Proposition & Revenue Architecture</p>
+        </div>
+        
+        <!-- Business Model Canvas -->
+        <div class="business-canvas">
+            <!-- Key Partners -->
+            <div class="canvas-block key-partners">
+                <h3><span>🤝</span> Key Partners</h3>
+                <ul>
+                    <li>✓ AI Providers (OpenAI, Google, etc.)</li>
+                    <li>✓ Cloud Infrastructure (AWS, Azure)</li>
+                    <li>✓ Security Research Community</li>
+                    <li>✓ Compliance Organizations</li>
+                    <li>✓ System Integrators</li>
+                    <li>✓ Technology Partners</li>
+                    <li>✓ Industry Associations</li>
+                </ul>
+            </div>
+            
+            <!-- Key Activities -->
+            <div class="canvas-block key-activities">
+                <h3><span>⚡</span> Key Activities</h3>
+                <ul>
+                    <li>✓ Vulnerability Discovery</li>
+                    <li>✓ Threat Intelligence</li>
+                    <li>✓ Security Testing</li>
+                    <li>✓ Real-time Protection</li>
+                    <li>✓ Red Team Services</li>
+                    <li>✓ Certification Program</li>
+                </ul>
+            </div>
+            
+            <!-- Key Resources -->
+            <div class="canvas-block key-resources">
+                <h3><span>🔧</span> Key Resources</h3>
+                <ul>
+                    <li>✓ 922 Threat Vector Catalog</li>
+                    <li>✓ Osiris Eye Platform</li>
+                    <li>✓ NeuralShield Technology</li>
+                    <li>✓ Prompt Package Library</li>
+                    <li>✓ Security Expertise</li>
+                    <li>✓ Global Infrastructure</li>
+                </ul>
+            </div>
+            
+            <!-- Value Propositions -->
+            <div class="canvas-block value-props">
+                <h3><span>💎</span> Value Propositions</h3>
+                <ul>
+                    <li>✓ <strong>Complete AI Security:</strong> One platform for all AI types</li>
+                    <li>✓ <strong>Pre & Post Protection:</strong> Testing + Live defense</li>
+                    <li>✓ <strong>Industry Standard:</strong> Become the "OneTrust" of AI</li>
+                    <li>✓ <strong>Trust Badge:</strong> Public verification system</li>
+                    <li>✓ <strong>Expert Services:</strong> Red team & certification</li>
+                    <li>✓ <strong>Fast Integration:</strong> < 1 hour setup</li>
+                    <li>✓ <strong>Low Latency:</strong> < 50ms overhead</li>
+                    <li>✓ <strong>Compliance Ready:</strong> All major frameworks</li>
+                </ul>
+            </div>
+            
+            <!-- Customer Relations -->
+            <div class="canvas-block customer-relations">
+                <h3><span>❤️</span> Customer Relations</h3>
+                <ul>
+                    <li>✓ 24/7 SOC Support</li>
+                    <li>✓ Dedicated Success Managers</li>
+                    <li>✓ Community Forums</li>
+                    <li>✓ Training Programs</li>
+                    <li>✓ Regular Security Updates</li>
+                </ul>
+            </div>
+            
+            <!-- Channels -->
+            <div class="canvas-block channels">
+                <h3><span>📡</span> Channels</h3>
+                <ul>
+                    <li>✓ Direct Sales</li>
+                    <li>✓ Partner Network</li>
+                    <li>✓ Cloud Marketplaces</li>
+                    <li>✓ Developer Portal</li>
+                    <li>✓ API Integration</li>
+                </ul>
+            </div>
+            
+            <!-- Customer Segments -->
+            <div class="canvas-block customer-segments">
+                <h3><span>👥</span> Customer Segments</h3>
+                <ul>
+                    <li>✓ <strong>Enterprises:</strong> Fortune 500 using AI</li>
+                    <li>✓ <strong>AI Startups:</strong> Need security from day 1</li>
+                    <li>✓ <strong>Government:</strong> Critical AI systems</li>
+                    <li>✓ <strong>Healthcare:</strong> Patient-facing AI</li>
+                    <li>✓ <strong>Financial:</strong> Trading & advisory AI</li>
+                    <li>✓ <strong>SaaS Companies:</strong> AI features</li>
+                    <li>✓ <strong>Developers:</strong> Building AI apps</li>
+                </ul>
+            </div>
+            
+            <!-- Cost Structure -->
+            <div class="canvas-block cost-structure">
+                <h3><span>💸</span> Cost Structure</h3>
+                <ul>
+                    <li>• Infrastructure & Cloud (30%)</li>
+                    <li>• R&D & Engineering (35%)</li>
+                    <li>• Security Operations (15%)</li>
+                    <li>• Sales & Marketing (15%)</li>
+                    <li>• Compliance & Legal (5%)</li>
+                </ul>
+            </div>
+            
+            <!-- Revenue Streams -->
+            <div class="canvas-block revenue-streams">
+                <h3><span>💰</span> Revenue Streams</h3>
+                <ul>
+                    <li>✓ <strong>Discovery:</strong> Threat intelligence subscriptions ($50K-500K/year)</li>
+                    <li>✓ <strong>Testing:</strong> Per-test + annual contracts ($0.10-1.00/test)</li>
+                    <li>✓ <strong>Protection:</strong> Per-request pricing ($0.50-5.00/million)</li>
+                    <li>✓ <strong>Labs:</strong> Red team + sandbox ($50K-250K/project)</li>
+                    <li>✓ <strong>Badges:</strong> Annual licensing ($5K-50K/year)</li>
+                    <li>✓ <strong>Certification:</strong> Exam + training ($500-5K/person)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Value Chain -->
+        <div class="value-chain">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">
+                🔗 Osiris Value Chain
+            </h2>
+            
+            <div class="chain-flow">
+                <div class="chain-step">
+                    <span class="chain-icon">🔍</span>
+                    <div class="chain-title">Discovery</div>
+                    <div class="chain-value">Find vulnerabilities globally</div>
+                </div>
+                
+                <div class="chain-step">
+                    <span class="chain-icon">📊</span>
+                    <div class="chain-title">Catalog</div>
+                    <div class="chain-value">Map to 922 vectors</div>
+                </div>
+                
+                <div class="chain-step">
+                    <span class="chain-icon">📦</span>
+                    <div class="chain-title">Package</div>
+                    <div class="chain-value">Create prompt tests</div>
+                </div>
+                
+                <div class="chain-step">
+                    <span class="chain-icon">🧪</span>
+                    <div class="chain-title">Test</div>
+                    <div class="chain-value">Evaluate AI systems</div>
+                </div>
+                
+                <div class="chain-step">
+                    <span class="chain-icon">🛡️</span>
+                    <div class="chain-title">Protect</div>
+                    <div class="chain-value">Live defense</div>
+                </div>
+                
+                <div class="chain-step">
+                    <span class="chain-icon">🏆</span>
+                    <div class="chain-title">Certify</div>
+                    <div class="chain-value">Trust & verify</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Revenue Model Details -->
+        <div class="revenue-model">
+            <h2 style="text-align: center; color: #16a085; margin-bottom: 30px;">
+                💰 Revenue Model Breakdown
+            </h2>
+            
+            <div class="revenue-grid">
+                <div class="revenue-card">
+                    <div class="revenue-icon">🔍</div>
+                    <h3 class="revenue-title">Discovery & Intelligence</h3>
+                    <div class="revenue-amount">$10M</div>
+                    <div class="revenue-details">
+                        200 Enterprise customers<br>
+                        @ $50K average annual<br>
+                        High-margin SaaS model<br>
+                        90% gross margins
+                    </div>
+                </div>
+                
+                <div class="revenue-card">
+                    <div class="revenue-icon">🧪</div>
+                    <h3 class="revenue-title">Testing Platform</h3>
+                    <div class="revenue-amount">$25M</div>
+                    <div class="revenue-details">
+                        10,000 customers<br>
+                        250M tests annually<br>
+                        @ $0.10 average/test<br>
+                        85% gross margins
+                    </div>
+                </div>
+                
+                <div class="revenue-card">
+                    <div class="revenue-icon">🛡️</div>
+                    <h3 class="revenue-title">Live Protection</h3>
+                    <div class="revenue-amount">$50M</div>
+                    <div class="revenue-details">
+                        1B requests/day<br>
+                        @ $1.50/million average<br>
+                        Usage-based pricing<br>
+                        75% gross margins
+                    </div>
+                </div>
+                
+                <div class="revenue-card">
+                    <div class="revenue-icon">🔬</div>
+                    <h3 class="revenue-title">Adversarial Labs</h3>
+                    <div class="revenue-amount">$15M</div>
+                    <div class="revenue-details">
+                        300 engagements<br>
+                        @ $50K average<br>
+                        High-value services<br>
+                        60% gross margins
+                    </div>
+                </div>
+                
+                <div class="revenue-card">
+                    <div class="revenue-icon">🏆</div>
+                    <h3 class="revenue-title">Badge Program</h3>
+                    <div class="revenue-amount">$20M</div>
+                    <div class="revenue-details">
+                        5,000 organizations<br>
+                        @ $4K average annual<br>
+                        Recurring revenue<br>
+                        95% gross margins
+                    </div>
+                </div>
+                
+                <div class="revenue-card">
+                    <div class="revenue-icon">📜</div>
+                    <h3 class="revenue-title">Certification</h3>
+                    <div class="revenue-amount">$10M</div>
+                    <div class="revenue-details">
+                        10,000 professionals<br>
+                        @ $1K average<br>
+                        Training included<br>
+                        80% gross margins
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px; padding: 20px; background: #1a1a2e; border-radius: 10px;">
+                <h3 style="color: #16a085; margin-bottom: 10px;">Total Annual Revenue Potential</h3>
+                <div style="font-size: 3em; font-weight: bold; color: #16a085;">$130M+</div>
+                <p style="color: #a0a0b0; margin-top: 10px;">With 82% average gross margins</p>
+            </div>
+        </div>
+        
+        <!-- Market Opportunity -->
+        <div class="market-opportunity">
+            <h2 style="color: #9b59b6; margin-bottom: 30px;">
+                🌍 Market Opportunity
+            </h2>
+            
+            <div class="market-stats">
+                <div class="market-stat">
+                    <div class="stat-value">$15B</div>
+                    <div class="stat-label">AI Security TAM by 2030</div>
+                </div>
+                <div class="market-stat">
+                    <div class="stat-value">47%</div>
+                    <div class="stat-label">CAGR 2024-2030</div>
+                </div>
+                <div class="market-stat">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Enterprises need AI security</div>
+                </div>
+                <div class="market-stat">
+                    <div class="stat-value">3M+</div>
+                    <div class="stat-label">Potential customers</div>
+                </div>
+                <div class="market-stat">
+                    <div class="stat-value">$5.8B</div>
+                    <div class="stat-label">Annual AI breaches</div>
+                </div>
+                <div class="market-stat">
+                    <div class="stat-value">922</div>
+                    <div class="stat-label">Threat vectors covered</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Competitive Advantages -->
+        <div class="advantages">
+            <h2 style="text-align: center; color: #22c55e; margin-bottom: 30px;">
+                🚀 Competitive Advantages
+            </h2>
+            
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">🎯</div>
+                    <h4>First Mover</h4>
+                    <p style="color: #a0a0b0; font-size: 0.9em;">
+                        First unified AI security platform covering all AI types
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">📊</div>
+                    <h4>Comprehensive Catalog</h4>
+                    <p style="color: #a0a0b0; font-size: 0.9em;">
+                        922 threat vectors across 25 AI system types
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">🏆</div>
+                    <h4>Industry Standard</h4>
+                    <p style="color: #a0a0b0; font-size: 0.9em;">
+                        Becoming the "OneTrust" of AI security
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">⚡</div>
+                    <h4>Low Latency</h4>
+                    <p style="color: #a0a0b0; font-size: 0.9em;">
+                        < 50ms overhead with intelligent caching
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">🌍</div>
+                    <h4>Global Scale</h4>
+                    <p style="color: #a0a0b0; font-size: 0.9em;">
+                        15 regions, 99.9% uptime SLA
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">🔄</div>
+                    <h4>Complete Lifecycle</h4>
+                    <p style="color: #a0a0b0; font-size: 0.9em;">
+                        From discovery to certification
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Go-to-Market Strategy -->
+        <div style="background: #2d2d44; border-radius: 20px; padding: 40px; border: 3px solid #e74c3c;">
+            <h2 style="text-align: center; color: #e74c3c; margin-bottom: 30px;">
+                🎯 Go-to-Market Strategy
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="text-align: center;">
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Phase 1: Foundation (Q1-Q2 2025)</h3>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li>✓ Launch discovery & testing platform</li>
+                        <li>✓ Target 50 enterprise early adopters</li>
+                        <li>✓ Build prompt package library</li>
+                        <li>✓ Establish security research team</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center;">
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Phase 2: Scale (Q3-Q4 2025)</h3>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li>✓ Launch live protection (Osiris Eye)</li>
+                        <li>✓ Open Adversarial Labs</li>
+                        <li>✓ Scale to 500+ customers</li>
+                        <li>✓ Launch partner program</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center;">
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Phase 3: Standard (2026+)</h3>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li>✓ Launch badge & certification</li>
+                        <li>✓ Become industry standard</li>
+                        <li>✓ Global expansion</li>
+                        <li>✓ IPO preparation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate numbers on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease-out';
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.canvas-block, .revenue-card, .market-stat').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Add hover effects
+            document.querySelectorAll('.revenue-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('.revenue-title').textContent;
+                    const amount = this.querySelector('.revenue-amount').textContent;
+                    const details = this.querySelector('.revenue-details').innerHTML;
+                    
+                    console.log(`Revenue Stream: ${title}\nProjected: ${amount}\nDetails: ${details}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
